@@ -59,13 +59,13 @@ namespace Character.Slingshot
 
         private void TencioningSlingshot()
         {
-            _newPosition = new Vector3(_startBorder.position.x, _startBorder.position.y, _startBorder.position.z + _joysticForceTencion.Vertical / DIVISION_SLINGSHOT_FORCE);
+            _newPosition = new Vector3(_startBorder.position.x + _joysticForceTencion.Horizontal / DIVISION_SLINGSHOT_FORCE, _startBorder.position.y, _startBorder.position.z + _joysticForceTencion.Vertical / DIVISION_SLINGSHOT_FORCE);
 
-            if (_newPosition.z < _startPosition.z - _maxDistanceTencion)
+            if ((_newPosition.x < _startPosition.x - _maxDistanceTencion) && (_newPosition.z < _startPosition.z - _maxDistanceTencion))
             {
                 return;
             }
-            else if (_newPosition.z > _startPosition.z)
+            else if ((_newPosition.x > _startPosition.x) && (_newPosition.z > _startPosition.z))
             {
                 return;
             }
@@ -77,7 +77,7 @@ namespace Character.Slingshot
                 StartCoroutine(StartingCoroutine());
             }
 
-            _newPosition = new Vector3(_player.position.x, _player.position.y, _newPosition.z + _player.position.y + Z_POSITION);
+            _newPosition = new Vector3(_newPosition.x + _player.position.x + Z_POSITION, _player.position.y, _newPosition.z + _player.position.y + Z_POSITION);
 
             _player.position = _newPosition;
         }

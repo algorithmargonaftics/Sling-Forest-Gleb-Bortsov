@@ -8,7 +8,7 @@ public class DynamicJoystick : Joystick
 {
     #region EVENTS
 
-    public static UnityEvent<float> OnStartGame = new UnityEvent<float>();//
+    public static UnityEvent<float, float> OnStartGame = new UnityEvent<float, float>();
     public static UnityEvent OnStarting = new UnityEvent();
 
     #endregion
@@ -35,9 +35,9 @@ public class DynamicJoystick : Joystick
     {
         background.gameObject.SetActive(false);
 
-        if (Vertical < 0)
+        if (Vertical != 0 && Horizontal != 0)
         {
-            OnStartGame?.Invoke(-Vertical);
+            OnStartGame?.Invoke(-Vertical, Horizontal);
 
             //gameObject.SetActive(false);
         }
