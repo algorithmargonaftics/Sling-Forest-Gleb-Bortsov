@@ -67,6 +67,7 @@ MonoBehaviour:
   _parameters: {fileID: 11400000, guid: 8889c8ade1f624b4cb6b5265ddea26f3, type: 2}
   Start: {fileID: 6191627742904677992}
   End: {fileID: 1074511155201680304}
+  _typePosition: 3
 --- !u!1 &5562812277228926820
 GameObject:
   m_ObjectHideFlags: 0

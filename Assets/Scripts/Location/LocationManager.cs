@@ -54,6 +54,8 @@ namespace Location
                         newChunk.transform.position = gameObject.transform.position;
                     }
 
+                    newChunk.Create();
+
                     _spawnedChunks.Add(newChunk);
                 }
                 else if (i == _chunkNumber)
