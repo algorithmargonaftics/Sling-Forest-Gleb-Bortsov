@@ -344,6 +344,7 @@ GameObject:
   - component: {fileID: 54468995421688185}
   - component: {fileID: 9171718798811450960}
   - component: {fileID: 4052006410217415712}
+  - component: {fileID: 6961480260391956375}
   m_Layer: 0
   m_Name: Crystal Red
   m_TagString: Untagged
@@ -415,6 +416,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _crystalValue: 1
   _destroyEffect: {fileID: 4293471315431595347, guid: 2e0dee3d376f3a8439b1006c10978cf6, type: 3}
+--- !u!95 &6961480260391956375
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324459955138239723}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6da795875791ce64c9e3c2673e1ebdc1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &324524340818342907
 GameObject:
   m_ObjectHideFlags: 0
