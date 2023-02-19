@@ -15,7 +15,7 @@ namespace Location
     {
         #region CONST
 
-        private const int NUMBER_WALL = 2;
+        private const float Y_POSITION = 1f;
 
         #endregion
 
@@ -24,7 +24,9 @@ namespace Location
         [Header("Parameters")]
         public Transform Start;
         public Transform End;
-        [Space(height: 5f)]
+        [Space (height: 5f)]
+
+        [SerializeField] private TypePosition _typePosition;
 
         private float _xPosition = 0f;
 
@@ -32,10 +34,39 @@ namespace Location
 
         private float _xSpawnerPosition => _parameters.XSpawnerPosition;
 
+        private GameObject _blockObstructions => _parameters.ObstructionObject;
+
         #endregion
 
 
         #region Public Methods
+
+        public void Create()
+        {
+            GameObject obstruction = null;
+
+            obstruction = Instantiate(_blockObstructions);
+
+            if (_typePosition == TypePosition.Left)
+            {
+                _xPosition = -_xSpawnerPosition;
+            }
+            else if (_typePosition == TypePosition.Center)
+            {
+                _xPosition = 0f;
+            }
+            else if (_typePosition == TypePosition.Right)
+            {
+                _xPosition = _xSpawnerPosition;
+            }
+
+            obstruction.gameObject.transform.position = new Vector3(_xPosition, Y_POSITION, gameObject.transform.position.z);
+
+            if (_typePosition == TypePosition.Non)
+            {
+                Destroy(obstruction.gameObject);
+            }
+        }
 
         #endregion
     }
