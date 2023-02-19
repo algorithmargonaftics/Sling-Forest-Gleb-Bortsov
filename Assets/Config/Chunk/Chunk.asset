@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 600f47087a3cc8646a2656263d74419e, type: 3}
   m_Name: Chunk
   m_EditorClassIdentifier: 
-  _xSpawnerPosition: 6.5
+  _xSpawnerPosition: 1.5
+  _obstructionObject: {fileID: 2417067455939056069, guid: 1a5f5157b02dda041bfdfb4abb608d53, type: 3}
