@@ -43,9 +43,9 @@ namespace Location
 
         public void Create()
         {
-            GameObject obstruction = null;
-
-            obstruction = Instantiate(_blockObstructions);
+            if (_typePosition == TypePosition.Non) return;
+ 
+            GameObject obstruction = Instantiate(_blockObstructions);
 
             if (_typePosition == TypePosition.Left)
             {
@@ -61,11 +61,6 @@ namespace Location
             }
 
             obstruction.gameObject.transform.position = new Vector3(_xPosition, Y_POSITION, gameObject.transform.position.z);
-
-            if (_typePosition == TypePosition.Non)
-            {
-                Destroy(obstruction.gameObject);
-            }
         }
 
         #endregion
