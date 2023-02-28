@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 504765199}
   - component: {fileID: 504765198}
   m_Layer: 5
-  m_Name: Canvas Joystic
+  m_Name: Canvas Joystick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

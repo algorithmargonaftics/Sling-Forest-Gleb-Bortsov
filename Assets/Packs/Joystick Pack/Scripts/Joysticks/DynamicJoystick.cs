@@ -1,10 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class DynamicJoystick : Joystick
 {
+    #region ACTIONS
+
+    public static Action OnStartingGame = null;
+    public static Action OnStartGame = null;
+
+    #endregion
+
     public float MoveThreshold { get { return moveThreshold; } set { moveThreshold = Mathf.Abs(value); } }
 
     [SerializeField] private float moveThreshold = 1;
@@ -18,6 +24,8 @@ public class DynamicJoystick : Joystick
 
     public override void OnPointerDown(PointerEventData eventData)
     {
+        OnStartingGame?.Invoke();
+
         background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
         background.gameObject.SetActive(true);
         base.OnPointerDown(eventData);
@@ -25,6 +33,8 @@ public class DynamicJoystick : Joystick
 
     public override void OnPointerUp(PointerEventData eventData)
     {
+        OnStartGame?.Invoke();
+
         background.gameObject.SetActive(false);
         base.OnPointerUp(eventData);
     }
