@@ -40,6 +40,9 @@ namespace Character.Slingshot
             float vertical = _slingJoystick.Vertical;
 
             _directionMove = new Vector3(-horizontal, gameObject.transform.position.y, -vertical);
+
+            //work
+            gameObject.transform.rotation = Quaternion.EulerAngles(0f, _directionMove.x, 0f);
         }
 
         private void OnMoving()
