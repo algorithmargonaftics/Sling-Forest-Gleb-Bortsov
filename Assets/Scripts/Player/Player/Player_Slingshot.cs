@@ -1,5 +1,6 @@
 using UnityEngine;
 using Players;
+using DG.Tweening;
 
 namespace Character.Slingshot
 {
@@ -7,12 +8,15 @@ namespace Character.Slingshot
     public class Player_Slingshot : MonoBehaviour
     {
         [Header("Parameters")]
-        [SerializeField] private float _maxSlingDistance = 3f;
+        [SerializeField] private float _maxSlingDistance = 2f;
+
+        [SerializeField] private float _movingTime = 1f;
 
         [Header("Private")]
-        [SerializeField] private Vector3 _directionMove = Vector3.zero;
+        private Vector3 _directionMove = Vector3.zero;
 
-        [SerializeField] private Joystick _slingJoystick = null; //_maxSlingValue
+        private Joystick _slingJoystick = null;
+
 
         #region MONO
 
@@ -48,13 +52,16 @@ namespace Character.Slingshot
             float vertical = _slingJoystick.Vertical;
 
             _directionMove = new Vector3(-horizontal, gameObject.transform.position.y, -vertical);
-
-            //Debug.Log($"h - {horizontal} v - {vertical} d - {_directionMove}");
         }
 
         private void OnMoving()
         {
-            Debug.Log($"OnMoving() dir = {_directionMove}");
+            float newXPosition = gameObject.transform.position.x + (_maxSlingDistance * _directionMove.x);
+            float newZPosition = gameObject.transform.position.z + (_maxSlingDistance * _directionMove.z);
+
+            Vector3 newPosition = new Vector3(newXPosition, gameObject.transform.position.y, newZPosition);
+
+            gameObject.transform.DOMove(newPosition, _movingTime);
         }
 
         #endregion

@@ -207,6 +207,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 840861810637198866, guid: 44ce1a7369489c440aebc4f5a7cbc3e7, type: 3}
+      propertyPath: _movingTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 840861810637198866, guid: 44ce1a7369489c440aebc4f5a7cbc3e7, type: 3}
+      propertyPath: _maxSlingDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048681661008512095, guid: 44ce1a7369489c440aebc4f5a7cbc3e7, type: 3}
+      propertyPath: _damageValue
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6990475473097794097, guid: 44ce1a7369489c440aebc4f5a7cbc3e7, type: 3}
       propertyPath: m_Name
       value: Player
