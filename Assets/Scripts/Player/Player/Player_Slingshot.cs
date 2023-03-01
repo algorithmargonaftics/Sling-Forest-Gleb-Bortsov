@@ -8,6 +8,12 @@ namespace Character.Slingshot
     [RequireComponent(typeof(Player_Movement))]
     public class Player_Slingshot : MonoBehaviour
     {
+        #region CONSTS
+
+        private const float MINUS_TIME = 0.2f;
+
+        #endregion
+
         [Header("Parameters")]
         [SerializeField] private float _maxMoveDistance = 2f;
         [SerializeField] private float _movingTime = 1f;
@@ -36,10 +42,14 @@ namespace Character.Slingshot
 
         private void OnSlinging()
         {
+            if (_isMoving == true) return;
+
             float horizontal = _slingJoystick.Horizontal;
             float vertical = _slingJoystick.Vertical;
 
             _directionMove = new Vector3(-horizontal, gameObject.transform.position.y, -vertical);
+
+            RotationModel();
         }
 
         private void OnMoving()
@@ -58,14 +68,34 @@ namespace Character.Slingshot
             StartCoroutine(IsMovingCoroutine());
         }
 
+        private void RotationModel()
+        {
+            if (_slingJoystick.Horizontal == 0 || _slingJoystick.Vertical == 0)
+            {
+                gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+                return;
+            }
+
+            float angle = Mathf.Atan2(_directionMove.x, _directionMove.z) * Mathf.Rad2Deg;
+
+            gameObject.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+
+        #region Coroutine
+
         private IEnumerator IsMovingCoroutine()
         {
-            yield return new WaitForSeconds(_movingTime);
+            yield return new WaitForSeconds(_movingTime - MINUS_TIME);
 
             _isMoving = false;
 
+            gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
             yield break;
         } 
+
+        #endregion
 
         #endregion
     }

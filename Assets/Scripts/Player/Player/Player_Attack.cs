@@ -1,4 +1,5 @@
 using UnityEngine;
+using Enemies;
 
 namespace Players
 {
@@ -29,7 +30,9 @@ namespace Players
         {
             if (collision.gameObject.CompareTag(TAG_ENEMY))
             {
-                OnAttack(collision, _damageValue);
+                Enemy_Attack enemy = collision.gameObject.GetComponent<Enemy_Attack>();
+
+                OnAttack(enemy, _damageValue);
             }
         }
 
@@ -37,10 +40,9 @@ namespace Players
 
         #region Private Methods
 
-        private void OnAttack(Collision collision, int damageValue)
+        private void OnAttack(Enemy_Attack enemy, int damageValue)
         {
-            //нанесение урона врагу
-            //collision.TakeDamege(_damageValue);
+            enemy.OnTakeDamage(damageValue);
 
             _animator.SetTrigger(NAME_ATTACK_ANIMATION);
         }
