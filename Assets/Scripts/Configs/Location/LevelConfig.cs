@@ -8,12 +8,19 @@ namespace Configs
     {
         [Header("Location Parameters")]
         [SerializeField] private Chunk[] _chunkPrefab;
+        [Space (height: 5f)]
+
         [SerializeField] private Chunk _finishChunkPrefab;
+
+        [Header("Location Parameters")]
+        [SerializeField] private int _maxSlingCount = 10;
 
         #region Public Fields
 
         public Chunk[] ChunkPrefab => _chunkPrefab;
         public Chunk FinishChunkPrefab => _finishChunkPrefab;
+
+        public int MaxSlingCount => _maxSlingCount;
 
         #endregion
     }

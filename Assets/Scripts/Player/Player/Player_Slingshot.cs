@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Players;
+using Levels.Settings;
 using DG.Tweening;
 
 namespace Character.Slingshot
@@ -18,8 +19,11 @@ namespace Character.Slingshot
         [SerializeField] private float _maxMoveDistance = 2f;
         [SerializeField] private float _movingTime = 1f;
 
-        [Header("Private")]
-        [SerializeField] private bool _isMoving = false;
+        [SerializeField] private int _maxSlingCount = 0;
+        [SerializeField] private int _currentSlingCount = 0;
+
+        private bool _isMoving = false;
+        private bool _isGameActive = true;
 
         private Vector3 _directionMove = Vector3.zero;
 
@@ -32,9 +36,17 @@ namespace Character.Slingshot
 
         private void Update() => OnSlinging();
 
-        private void OnEnable() => DynamicJoystick.OnStartGame += OnMoving;
+        private void OnEnable()
+        {
+            DynamicJoystick.OnStartGame += OnMoving;
+            LevelSettings.OnSetMaxSlingCount += SetMaxSlingCount;
+        }
 
-        private void OnDisable() => DynamicJoystick.OnStartGame -= OnMoving;
+        private void OnDisable()
+        {
+            DynamicJoystick.OnStartGame -= OnMoving;
+            LevelSettings.OnSetMaxSlingCount -= SetMaxSlingCount;
+        }
 
         #endregion
 
@@ -42,6 +54,7 @@ namespace Character.Slingshot
 
         private void OnSlinging()
         {
+            if (_isGameActive == false) return;
             if (_isMoving == true) return;
 
             float horizontal = _slingJoystick.Horizontal;
@@ -54,7 +67,10 @@ namespace Character.Slingshot
 
         private void OnMoving()
         {
+            if (_isGameActive == false) return;
             if (_isMoving == true) return;
+
+            UpdateSlingUI();
 
             _isMoving = true;
 
@@ -82,6 +98,30 @@ namespace Character.Slingshot
             gameObject.transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
 
+        private void UpdateSlingUI()
+        {
+            if (_currentSlingCount <= 0) return;
+
+            _currentSlingCount--;
+
+            //update UI
+            Debug.Log(_currentSlingCount);
+        }
+
+        private void ChechingSlingCount()
+        {
+            if (_currentSlingCount > 0) return;
+
+            _isGameActive = false;
+        }
+
+        private void SetMaxSlingCount(int value)
+        {
+            _maxSlingCount = value;
+
+            _currentSlingCount = _maxSlingCount;
+        }
+
         #region Coroutine
 
         private IEnumerator IsMovingCoroutine()
@@ -91,6 +131,8 @@ namespace Character.Slingshot
             _isMoving = false;
 
             gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+            ChechingSlingCount();
 
             yield break;
         } 
