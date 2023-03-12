@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
-using Players;
+using Character;
 using Levels.Settings;
 using DG.Tweening;
 
@@ -47,12 +47,14 @@ namespace Character.Slingshot
         {
             DynamicJoystick.OnStartGame += OnMoving;
             LevelSettings.OnSetMaxSlingCount += SetMaxSlingCount;
+            Player_Movement.OnFinishLevel += OnFinishLevel;
         }
 
         private void OnDisable()
         {
             DynamicJoystick.OnStartGame -= OnMoving;
             LevelSettings.OnSetMaxSlingCount -= SetMaxSlingCount;
+            Player_Movement.OnFinishLevel -= OnFinishLevel;
         }
 
         #endregion
@@ -112,8 +114,6 @@ namespace Character.Slingshot
             _currentSlingCount--;
 
             OnSling?.Invoke(_currentSlingCount);
-            //update UI
-            Debug.Log(_currentSlingCount);
         }
 
         private void ChechingSlingCount()
@@ -130,6 +130,13 @@ namespace Character.Slingshot
             _currentSlingCount = _maxSlingCount;
 
             OnSling?.Invoke(_currentSlingCount);
+        }
+
+        private void OnFinishLevel()
+        {
+            _currentSlingCount = 0;
+
+            _isGameActive = false;
         }
 
         #region Coroutine

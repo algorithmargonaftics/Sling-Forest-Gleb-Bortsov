@@ -21,6 +21,5 @@ MonoBehaviour:
   - {fileID: 3809470858941502443, guid: 60051e02f26f1ba4d9226034fada5538, type: 3}
   - {fileID: 5284200337389253771, guid: 09b340408b9f4f64ba4733d8843209f9, type: 3}
   - {fileID: 4177485482195605732, guid: 556e0bedf80d97e4a855231ec6fa450d, type: 3}
-  - {fileID: 5513016663621399625, guid: fe1a5cc78ac22c440863f3ecadd019f4, type: 3}
-  - {fileID: 5513016663621399625, guid: fe1a5cc78ac22c440863f3ecadd019f4, type: 3}
-  _finishChunkPrefab: {fileID: 5513016663621399625, guid: fe1a5cc78ac22c440863f3ecadd019f4, type: 3}
+  _finishChunkPrefab: {fileID: 5785510144865521576, guid: 7b17b39338e9ece4d90d1fea85d164f2, type: 3}
+  _maxSlingCount: 10
