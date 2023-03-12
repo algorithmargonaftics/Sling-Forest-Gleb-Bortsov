@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using Players;
 using Levels.Settings;
@@ -9,6 +10,12 @@ namespace Character.Slingshot
     [RequireComponent(typeof(Player_Movement))]
     public class Player_Slingshot : MonoBehaviour
     {
+        #region ACTION
+
+        public static Action<int> OnSling = null;
+
+        #endregion
+
         #region CONSTS
 
         private const float MINUS_TIME = 0.2f;
@@ -19,8 +26,8 @@ namespace Character.Slingshot
         [SerializeField] private float _maxMoveDistance = 2f;
         [SerializeField] private float _movingTime = 1f;
 
-        [SerializeField] private int _maxSlingCount = 0;
-        [SerializeField] private int _currentSlingCount = 0;
+        private int _maxSlingCount = 0;
+        private int _currentSlingCount = 0;
 
         private bool _isMoving = false;
         private bool _isGameActive = true;
@@ -104,6 +111,7 @@ namespace Character.Slingshot
 
             _currentSlingCount--;
 
+            OnSling?.Invoke(_currentSlingCount);
             //update UI
             Debug.Log(_currentSlingCount);
         }
@@ -120,6 +128,8 @@ namespace Character.Slingshot
             _maxSlingCount = value;
 
             _currentSlingCount = _maxSlingCount;
+
+            OnSling?.Invoke(_currentSlingCount);
         }
 
         #region Coroutine

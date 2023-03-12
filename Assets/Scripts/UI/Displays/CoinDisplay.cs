@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using Locations.Objects;
 
-namespace Interfaces.Coins
+namespace Interfaces.Displays
 {
     public class CoinDisplay : MonoBehaviour
     {
@@ -13,25 +13,13 @@ namespace Interfaces.Coins
 
         #region MONO
 
-        private void Awake()
-        {
-            _coinDisplayText = GetComponent<TextMeshProUGUI>();
-        }
+        private void Awake() => _coinDisplayText = GetComponent<TextMeshProUGUI>();
 
-        private void Start()
-        {
-            UpdateCoinDisplay();
-        }
+        private void Start() => UpdateCoinDisplay();
 
-        private void OnEnable()
-        {
-            Crystal.OnTake += TakeValue;
-        }
+        private void OnEnable() => Crystal.OnTake += TakeValue;
 
-        private void OnDisable()
-        {
-            Crystal.OnTake -= TakeValue;
-        }
+        private void OnDisable() => Crystal.OnTake -= TakeValue;
 
         #endregion
 
