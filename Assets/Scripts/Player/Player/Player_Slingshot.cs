@@ -13,6 +13,7 @@ namespace Character.Slingshot
         #region ACTION
 
         public static Action<int> OnSling = null;
+        public static Action OnZeroCount = null;
 
         #endregion
 
@@ -119,6 +120,8 @@ namespace Character.Slingshot
         private void ChechingSlingCount()
         {
             if (_currentSlingCount > 0) return;
+
+            OnZeroCount?.Invoke();
 
             _isGameActive = false;
         }

@@ -1,25 +1,35 @@
 using UnityEngine;
-using UnityEngine.UI;
 using Character;
+using Character.Slingshot;
+using Interfaces.Panels;
 
 namespace Gameplay
 {
     public class GameplayLogicController : MonoBehaviour
     {
-        //[Header("Panels")]
-        //[SerializeField] private FinishLevelPanel _finishLevelPanel = null;
+        [Header("Panels")]
+        [SerializeField] private FinishLevelPanel _finishLevelPanel = null;
+        [SerializeField] private LoseLevelPanel _loseLevelPanel = null;
 
 
         #region MONO
 
+        private void Start()
+        {
+            _finishLevelPanel.gameObject.SetActive(false);
+            _loseLevelPanel.gameObject.SetActive(false);
+        }
+
         private void OnEnable()
         {
             Player_Movement.OnFinishLevel += OnFinishLevel;
+            Player_Slingshot.OnZeroCount += OnLoseLevel;
         }
 
         private void OnDisable()
         {
             Player_Movement.OnFinishLevel -= OnFinishLevel;
+            Player_Slingshot.OnZeroCount -= OnLoseLevel;
         }
 
         #endregion
@@ -28,14 +38,15 @@ namespace Gameplay
 
         private void OnFinishLevel()
         {
-            //_finishLevelPanel.gameObject.SetActive(true);
-            Debug.Log("Finish");
+            _finishLevelPanel.gameObject.SetActive(true);
+        }
+
+        private void OnLoseLevel()
+        {
+            _loseLevelPanel.gameObject.SetActive(true);
+
         }
 
         #endregion
-
-        ///start ui
-        ///trigger = final
-        ///action = end
     }
 }
