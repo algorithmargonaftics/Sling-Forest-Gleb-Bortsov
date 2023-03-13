@@ -1,7 +1,7 @@
 using UnityEngine;
-using Players;
+using Character;
 
-namespace Players.Camera
+namespace Character.Camera
 {
     public class Camera_Follow : MonoBehaviour
     {
