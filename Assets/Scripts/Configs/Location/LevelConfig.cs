@@ -14,6 +14,7 @@ namespace Configs
 
         [Header("Location Parameters")]
         [SerializeField] private int _maxSlingCount = 10;
+        [SerializeField] private int _continuationSlingCount = 3;
 
         #region Public Fields
 
@@ -21,6 +22,7 @@ namespace Configs
         public Chunk FinishChunkPrefab => _finishChunkPrefab;
 
         public int MaxSlingCount => _maxSlingCount;
+        public int ContinuationSlingCount => _continuationSlingCount;
 
         #endregion
     }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
-using Character;
+using ADS;
 using Levels.Settings;
 using DG.Tweening;
 
@@ -28,6 +28,7 @@ namespace Character.Slingshot
         [SerializeField] private float _movingTime = 1f;
 
         private int _maxSlingCount = 0;
+        private int _continuationSlingCount = 0;
         private int _currentSlingCount = 0;
 
         private bool _isMoving = false;
@@ -48,14 +49,18 @@ namespace Character.Slingshot
         {
             DynamicJoystick.OnStartGame += OnMoving;
             LevelSettings.OnSetMaxSlingCount += SetMaxSlingCount;
+            LevelSettings.OnSetContinuationSlingCount += SetContinuationSlingCount;
             Player_Movement.OnFinishLevel += OnFinishLevel;
+            ADManager.OnContinuationGame += ContinuationGame;
         }
 
         private void OnDisable()
         {
             DynamicJoystick.OnStartGame -= OnMoving;
             LevelSettings.OnSetMaxSlingCount -= SetMaxSlingCount;
+            LevelSettings.OnSetContinuationSlingCount -= SetContinuationSlingCount;
             Player_Movement.OnFinishLevel -= OnFinishLevel;
+            ADManager.OnContinuationGame -= ContinuationGame;
         }
 
         #endregion
@@ -108,6 +113,15 @@ namespace Character.Slingshot
             gameObject.transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
 
+        private void ContinuationGame()
+        {
+            _currentSlingCount = _continuationSlingCount;
+
+            _isGameActive = true;
+
+            OnSling?.Invoke(_currentSlingCount);
+        }
+
         private void UpdateSlingUI()
         {
             if (_currentSlingCount <= 0) return;
@@ -133,6 +147,11 @@ namespace Character.Slingshot
             _currentSlingCount = _maxSlingCount;
 
             OnSling?.Invoke(_currentSlingCount);
+        }
+
+        private void SetContinuationSlingCount(int value)
+        {
+            _continuationSlingCount = value;
         }
 
         private void OnFinishLevel()

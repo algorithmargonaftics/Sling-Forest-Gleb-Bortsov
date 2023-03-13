@@ -9,6 +9,7 @@ namespace Levels.Settings
         #region ACTION
 
         public static Action<int> OnSetMaxSlingCount = null;
+        public static Action<int> OnSetContinuationSlingCount = null;
 
         #endregion
 
@@ -18,6 +19,7 @@ namespace Levels.Settings
         #region Private Fields
 
         private int _maxSlingCount => _levelConfig.MaxSlingCount;
+        private int _continuationSlingCount => _levelConfig.ContinuationSlingCount;
 
         #endregion
 
@@ -27,6 +29,7 @@ namespace Levels.Settings
         private void Start()
         {
             OnSetMaxSlingCount?.Invoke(_maxSlingCount);
+            OnSetContinuationSlingCount?.Invoke(_continuationSlingCount);
         }
 
         #endregion

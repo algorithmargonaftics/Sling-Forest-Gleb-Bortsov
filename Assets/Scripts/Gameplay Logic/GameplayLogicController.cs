@@ -1,4 +1,5 @@
 using UnityEngine;
+using ADS;
 using Character;
 using Character.Slingshot;
 using Interfaces.Panels;
@@ -24,12 +25,14 @@ namespace Gameplay
         {
             Player_Movement.OnFinishLevel += OnFinishLevel;
             Player_Slingshot.OnZeroCount += OnLoseLevel;
+            ADManager.OnContinuationGame += ContinuationGame;
         }
 
         private void OnDisable()
         {
             Player_Movement.OnFinishLevel -= OnFinishLevel;
             Player_Slingshot.OnZeroCount -= OnLoseLevel;
+            ADManager.OnContinuationGame -= ContinuationGame;
         }
 
         #endregion
@@ -44,7 +47,12 @@ namespace Gameplay
         private void OnLoseLevel()
         {
             _loseLevelPanel.gameObject.SetActive(true);
+        }
 
+        private void ContinuationGame()
+        {
+            _loseLevelPanel.gameObject.SetActive(false);
+            _finishLevelPanel.gameObject.SetActive(false);
         }
 
         #endregion

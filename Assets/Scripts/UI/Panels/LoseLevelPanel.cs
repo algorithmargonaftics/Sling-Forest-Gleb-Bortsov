@@ -31,5 +31,11 @@ namespace Interfaces.Panels
         }
 
         #endregion
+
+        #region Private Methods
+
+        
+
+        #endregion
     }
 }
