@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1833644841577266, guid: 2d66afaa58d85aa4c8b5deafaf9e7fe6, type: 3}
       propertyPath: m_Name
-      value: Enemy Assasin 1
+      value: Assasin Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1833644841577266, guid: 2d66afaa58d85aa4c8b5deafaf9e7fe6, type: 3}
       propertyPath: m_TagString
@@ -37,7 +37,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4985742262275402, guid: 2d66afaa58d85aa4c8b5deafaf9e7fe6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4985742262275402, guid: 2d66afaa58d85aa4c8b5deafaf9e7fe6, type: 3}
       propertyPath: m_LocalPosition.z
