@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Enemies
 {
+    [RequireComponent (typeof (BoxCollider))]
     public class Enemy_Attack : MonoBehaviour
     {
         #region CONSTS
