@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEditor;
+using System;
+using System.Collections;
 using DG.Tweening;
 using Character.Slingshot;
 
@@ -16,6 +18,12 @@ namespace Enemies
     [RequireComponent (typeof(Transform))]
     public class Enemy_Patrol : MonoBehaviour
     {
+        #region ACTION
+
+        public static Action OnStopMovement = null;
+
+        #endregion
+
         #region CONSTS
 
         private const float Y_POSITION = 1f;
@@ -64,9 +72,7 @@ namespace Enemies
             if (IsXPatrol == true) newPosition = new Vector3(PointToPointTransformPosition[_pointPatrolIndex], Y_POSITION, _transform.position.z);
             if (IsXPatrol == false) newPosition = new Vector3(_transform.position.x, Y_POSITION, PointToPointTransformPosition[_pointPatrolIndex]);
 
-            _transform.DOMove(newPosition, TimePatrol);
-
-            ChangePatrolIndex();
+            StartCoroutine(PatrolingCoroutine(newPosition));
         }
 
         private void ChangePatrolIndex()
@@ -75,6 +81,23 @@ namespace Enemies
 
             if (_pointPatrolIndex >= PointToPointTransformPosition.Length) _pointPatrolIndex = 0;
         }
+
+        #region Coroutines
+
+        private IEnumerator PatrolingCoroutine(Vector3 newPosition)
+        {
+            _transform.DOMove(newPosition, TimePatrol);
+
+            yield return new WaitForSeconds(TimePatrol);
+
+            ChangePatrolIndex();
+
+            OnStopMovement?.Invoke();
+
+            yield break;
+        }
+
+        #endregion
 
         #endregion
     }

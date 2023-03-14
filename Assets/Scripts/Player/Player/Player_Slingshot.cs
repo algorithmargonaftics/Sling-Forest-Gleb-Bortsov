@@ -4,6 +4,7 @@ using System.Collections;
 using ADS;
 using Levels.Settings;
 using DG.Tweening;
+using Enemies;
 
 namespace Character.Slingshot
 {
@@ -53,6 +54,7 @@ namespace Character.Slingshot
             LevelSettings.OnSetContinuationSlingCount += SetContinuationSlingCount;
             Player_Movement.OnFinishLevel += OnFinishLevel;
             ADManager.OnContinuationGame += ContinuationGame;
+            Enemy_Patrol.OnStopMovement += ReadySling;
         }
 
         private void OnDisable()
@@ -62,6 +64,7 @@ namespace Character.Slingshot
             LevelSettings.OnSetContinuationSlingCount -= SetContinuationSlingCount;
             Player_Movement.OnFinishLevel -= OnFinishLevel;
             ADManager.OnContinuationGame -= ContinuationGame;
+            Enemy_Patrol.OnStopMovement -= ReadySling;
         }
 
         #endregion
@@ -162,13 +165,13 @@ namespace Character.Slingshot
             _isGameActive = false;
         }
 
+        private void ReadySling() => _isMoving = false;
+
         #region Coroutine
 
         private IEnumerator IsMovingCoroutine()
         {
             yield return new WaitForSeconds(_movingTime - MINUS_TIME);
-
-            _isMoving = false;
 
             gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
