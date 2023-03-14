@@ -13,6 +13,7 @@ namespace Character.Slingshot
         #region ACTION
 
         public static Action<int> OnSling = null;
+        public static Action OnSlinged = null;
         public static Action OnZeroCount = null;
 
         #endregion
@@ -172,6 +173,8 @@ namespace Character.Slingshot
             gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
             ChechingSlingCount();
+
+            OnSlinged?.Invoke();
 
             yield break;
         } 

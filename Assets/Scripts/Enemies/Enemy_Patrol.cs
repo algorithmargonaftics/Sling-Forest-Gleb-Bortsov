@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using DG.Tweening;
+using Character.Slingshot;
 
 namespace Enemies
 {
@@ -44,12 +45,12 @@ namespace Enemies
 
         private void OnEnable()
         {
-            Patroling();
+            Player_Slingshot.OnSlinged += Patroling;
         }
 
         private void OnDisable()
         {
-            
+            Player_Slingshot.OnSlinged -= Patroling;
         }
 
         #endregion
@@ -72,7 +73,7 @@ namespace Enemies
         {
             _pointPatrolIndex++;
 
-            if (_pointPatrolIndex > PointToPointTransformPosition.Length) _pointPatrolIndex = 0;
+            if (_pointPatrolIndex >= PointToPointTransformPosition.Length) _pointPatrolIndex = 0;
         }
 
         #endregion
