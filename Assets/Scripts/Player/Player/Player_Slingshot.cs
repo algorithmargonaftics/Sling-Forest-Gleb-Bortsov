@@ -2,9 +2,10 @@ using UnityEngine;
 using System;
 using System.Collections;
 using ADS;
+using Enemies;
+using Character;
 using Levels.Settings;
 using DG.Tweening;
-using Enemies;
 
 namespace Character.Slingshot
 {
@@ -23,6 +24,8 @@ namespace Character.Slingshot
 
         private const float MINUS_TIME = 0.2f;
 
+        private const string TAG_ENEMY = "Enemy";
+
         #endregion
 
         [Header("Parameters")]
@@ -35,17 +38,22 @@ namespace Character.Slingshot
 
         private bool _isMoving = false;
         private bool _isGameActive = true;
+        private bool _isEnemies = true;
 
         private Vector3 _directionMove = Vector3.zero;
 
         private Joystick _slingJoystick = null;
+        private GameObject[] _enemies;
 
 
         #region MONO
 
         private void Awake() => _slingJoystick = FindObjectOfType<Joystick>();
 
-        private void Update() => OnSlinging();
+        private void Update()
+        {
+            OnSlinging();
+        }
 
         private void OnEnable()
         {
@@ -54,6 +62,7 @@ namespace Character.Slingshot
             LevelSettings.OnSetContinuationSlingCount += SetContinuationSlingCount;
             Player_Movement.OnFinishLevel += OnFinishLevel;
             ADManager.OnContinuationGame += ContinuationGame;
+            Enemy_Patrol.OnStartMovement += NotReadySling;
             Enemy_Patrol.OnStopMovement += ReadySling;
         }
 
@@ -64,6 +73,7 @@ namespace Character.Slingshot
             LevelSettings.OnSetContinuationSlingCount -= SetContinuationSlingCount;
             Player_Movement.OnFinishLevel -= OnFinishLevel;
             ADManager.OnContinuationGame -= ContinuationGame;
+            Enemy_Patrol.OnStartMovement -= NotReadySling;
             Enemy_Patrol.OnStopMovement -= ReadySling;
         }
 
@@ -165,6 +175,7 @@ namespace Character.Slingshot
             _isGameActive = false;
         }
 
+        private void NotReadySling() => _isMoving = true;
         private void ReadySling() => _isMoving = false;
 
         #region Coroutine

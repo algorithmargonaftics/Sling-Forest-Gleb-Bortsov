@@ -1,11 +1,18 @@
 using UnityEngine;
+using System;
 using Enemies;
 
-namespace Players
+namespace Character
 {
     [RequireComponent(typeof(Animator))]
     public class Player_Attack : MonoBehaviour
     {
+        #region ACTION
+
+        public static Action OnTakeDamage = null;
+
+        #endregion
+
         #region CONSTS
 
         private const string TAG_ENEMY = "Enemy";
@@ -45,6 +52,8 @@ namespace Players
             enemy.OnTakeDamage(damageValue);
 
             _animator.SetTrigger(NAME_ATTACK_ANIMATION);
+
+            OnTakeDamage?.Invoke();
         }
 
         #endregion

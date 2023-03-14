@@ -20,6 +20,7 @@ namespace Enemies
     {
         #region ACTION
 
+        public static Action OnStartMovement = null;
         public static Action OnStopMovement = null;
 
         #endregion
@@ -67,6 +68,18 @@ namespace Enemies
 
         private void Patroling()
         {
+            if (IsPatrolActive == false)
+            {
+                StartCoroutine(SkipPatrolCoroutine());
+
+                return;
+            }
+
+            if (PatrolType == PatrolTypes.PointToPoint) PointToPointPatrol();
+        }
+
+        private void PointToPointPatrol()
+        {
             Vector3 newPosition = Vector3.zero;
 
             if (IsXPatrol == true) newPosition = new Vector3(PointToPointTransformPosition[_pointPatrolIndex], Y_POSITION, _transform.position.z);
@@ -84,8 +97,17 @@ namespace Enemies
 
         #region Coroutines
 
+        private IEnumerator SkipPatrolCoroutine()
+        {
+            OnStopMovement?.Invoke();
+
+            yield break;
+        }
+
         private IEnumerator PatrolingCoroutine(Vector3 newPosition)
         {
+            OnStartMovement?.Invoke();
+
             _transform.DOMove(newPosition, TimePatrol);
 
             yield return new WaitForSeconds(TimePatrol);
