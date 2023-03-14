@@ -1616,7 +1616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 48002647403767123, guid: 3bb40e29d71314a45b5f8744a42ecf44, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.25
       objectReference: {fileID: 0}
     - target: {fileID: 48002647403767123, guid: 3bb40e29d71314a45b5f8744a42ecf44, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1653,6 +1653,22 @@ PrefabInstance:
     - target: {fileID: 48002647403767123, guid: 3bb40e29d71314a45b5f8744a42ecf44, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256069391452833764, guid: 3bb40e29d71314a45b5f8744a42ecf44, type: 3}
+      propertyPath: PointToPointTransformPosition.Array.data[0]
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 256069391452833764, guid: 3bb40e29d71314a45b5f8744a42ecf44, type: 3}
+      propertyPath: PointToPointTransformPosition.Array.data[1]
+      value: -1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 256069391452833764, guid: 3bb40e29d71314a45b5f8744a42ecf44, type: 3}
+      propertyPath: PointToPointTransformPosition.Array.data[0].x
+      value: -1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 256069391452833764, guid: 3bb40e29d71314a45b5f8744a42ecf44, type: 3}
+      propertyPath: PointToPointTransformPosition.Array.data[1].x
+      value: 1.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bb40e29d71314a45b5f8744a42ecf44, type: 3}
